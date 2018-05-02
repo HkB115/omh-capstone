@@ -5,8 +5,7 @@
 Provides an easy way to manage control of the server. This includes installation, updates, backups, starting, and stopping.
 Commands can easily be added to crontab for automation.
 
-Detailed instructions for setting up the bare-bone storage endpoint server without the use of a script can be found [here]
-https://github.com/openmhealth/omh-dsu-ri
+Detailed instructions for setting up the bare-bone storage endpoint server without the use of a script can be found [here](https://github.com/openmhealth/omh-dsu-ri).
 
 ### Installation
 
@@ -32,8 +31,7 @@ Once connected, issue the following commands:
 1. `su postgres`
 1. `psql`
 1. `\c omh`
-  * Add a row to the oauth_client_details table, as shown in [this script]
-https://github.com/openmhealth/omh-dsu-ri/blob/master/resources/rdbms/common/oauth2-sample-data.sql
+  * Add a row to the oauth_client_details table, as shown in [this script](https://github.com/openmhealth/omh-dsu-ri/blob/master/resources/rdbms/common/oauth2-sample-data.sql).
 1. `\q`
 1. `exit`
 1. `exit`
