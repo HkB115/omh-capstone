@@ -32,13 +32,17 @@ Once connected, issue the following commands:
 1. `psql`
 1. `\c omh`
   * Add a row to the oauth_client_details table, as shown in [this script](https://github.com/openmhealth/omh-dsu-ri/blob/master/resources/rdbms/common/oauth2-sample-data.sql).
+
+Once finished, exit back to the main screen
+
 1. `\q`
 1. `exit`
 1. `exit`
+1. Exit the screen by pressing Ctrl+D
 
 Add an end user by issuing this command, replacing host with the docker host (`docker-machine ip`):
 
-1. `curl -H "Content-Type:application/json" --data '{"username": "testUser", "password": "testUserPassword"}' http://host:8082/users`
+* `curl -H "Content-Type:application/json" --data '{"username": "testUser", "password": "testUserPassword"}' http://host:8082/users`
 
 In order to allow remote systems and users to connect to the server, you will have to change the virtual network adaptor.
 
