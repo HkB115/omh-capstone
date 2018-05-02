@@ -45,7 +45,3 @@ Add an end user by issuing this command, replacing host with the docker host (`d
 * `curl -H "Content-Type:application/json" --data '{"username": "testUser", "password": "testUserPassword"}' http://host:8082/users`
 
 In order to allow remote systems and users to connect to the server, you will need to create a macvlan network for docker and connect the authorization and resource servers to it.
-
-1. Open Virtualbox Manager
-1. Open the settings for the virtual machine the server uses
-1. In the Network tab, select Adaptor 2 and change "Attached to: Host-only Adapter" to your network card
