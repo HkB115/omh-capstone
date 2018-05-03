@@ -2,7 +2,7 @@
 
 ### Overview
 
-Provides an easy way to manage control of the server. This includes installation, updates, backups, starting, and stopping.
+Provides an easy way to manage control of the debian-based server (Ubuntu 14.04 or Debian Jessie and higher can be used). This includes installation, updates, backups, starting, and stopping.
 Commands can easily be added to crontab for automation.
 
 Detailed instructions for setting up the bare-bone storage endpoint server without the use of a script can be found [here](https://github.com/openmhealth/omh-dsu-ri).
@@ -39,9 +39,5 @@ Once finished, exit back to the main screen
 1. `exit`
 1. `exit`
 1. Exit the screen by pressing Ctrl+D
-
-Add an end user by issuing this command, replacing host with the docker host (`docker-machine ip`):
-
-* `curl -H "Content-Type:application/json" --data '{"username": "testUser", "password": "testUserPassword"}' http://host:8082/users`
 
 In order to allow remote systems and users to connect to the server, you will need to create a macvlan network for docker and connect the authorization and resource servers to it.
