@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "78d6d3d6-52c1-4fbe-8e86-01653a6ac71a",
+		"name": "Open mHealth DSU 1.0.M1",
+		"description": "A collection of requests related to the [Open mHealth](http://www.openmhealth.org/) DSU, an [API endpoint](https://github.com/openmhealth/omh-dsu-ri) for managing health data.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create an end-user",
+			"description": "These requests POST to the /users endpoint on the authorization server to create end-users.",
+			"item": [
+				{
+					"name": "create end-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"hkbennett2\",\n  \"password\": \"Capstone409\"\n}"
+						},
+						"url": {
+							"raw": "http://{{authorizationServer.host}}:{{authorizationServer.port}}/users",
+							"protocol": "http",
+							"host": [
+								"{{authorizationServer.host}}"
+							],
+							"port": "{{authorizationServer.port}}",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Subsequent attempts to POST this request should return a conflict since an end-user with the same username exists after the first request."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create data point using user token",
+			"description": "These requests POST a data point to the /dataPoints endpoint. The requests contain an Authorization header with a Bearer token that corresponds to a user token received from the authorization server.",
+			"item": [
+				{
+					"name": "create accelerometer data point",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"header\": {\n        \"id\": \"acc\",\n        \"creation_date_time\": \"2018-05-01T12:25:00Z\",\n        \"schema_id\": {\n            \"namespace\": \"omh-capstone\",\n            \"name\": \"accelerometer\",\n            \"version\": \"1.0\"\n        },\n        \"acquisition_provenance\": {\n            \"source_name\": \"Capstone\",\n            \"modality\": \"sensed\"\n        }\n    },\n    \"body\": {\n        \"data\": \"test data\",\n        \"effective_time_frame\": {\n            \"time_interval\": {\n            \t\"start\": \"2018-05-01T12:25:00Z\",\n            \t\"end\": \"2018-05-01T12:25:10Z\"\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints"
+							]
+						},
+						"description": "Subsequent attempts to POST this request should return a conflict since a data point with the same ID exists after the first request."
+					},
+					"response": []
+				},
+				{
+					"name": "create test data point",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"header\": {\n        \"id\": \"test\",\n        \"creation_date_time\": \"2018-05-01T12:25:00Z\",\n        \"schema_id\": {\n            \"namespace\": \"omh-capstone\",\n            \"name\": \"accelerometer\",\n            \"version\": \"1.0\"\n        },\n        \"acquisition_provenance\": {\n            \"source_name\": \"Capstone\",\n            \"modality\": \"sensed\"\n        }\n    },\n    \"body\": {\n        \"data\": \"test data\",\n        \"effective_time_frame\": {\n            \"time_interval\": {\n            \t\"start\": \"2018-05-01T12:25:00Z\",\n            \t\"end\": \"2018-05-01T12:25:10Z\"\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints"
+							]
+						},
+						"description": "Subsequent attempts to POST this request should return a conflict since a data point with the same ID exists after the first request."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "delete data point using user token",
+			"description": "These requests DELETE a data point from the /dataPoints endpoint. The requests contain an Authorization header with a Bearer token that corresponds to a user token received from the authorization server.",
+			"item": [
+				{
+					"name": "delete test data point",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints/test",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints",
+								"test"
+							]
+						},
+						"description": "To create the data point to delete, issue the request in the \"create data point using user token\" folder called \"success\". If the data point doesn't exist, the request should return a 404."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get access token using RO password grant",
+			"description": "These requests POST to the /oauth/token endpoint to get an access token using a resource owner password grant. A request body contains the resource owner's credentials. The requests are protected using HTTP Basic, using the client's credentials.",
+			"item": [
+				{
+					"name": "get access token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dGVzdENsaWVudDp0ZXN0Q2xpZW50U2VjcmV0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "testUser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "testUserPassword",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{authorizationServer.host}}:{{authorizationServer.port}}/oauth/token",
+							"protocol": "http",
+							"host": [
+								"{{authorizationServer.host}}"
+							],
+							"port": "{{authorizationServer.port}}",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get multiple data points using user token",
+			"description": "These requests GET zero or more data points from the /dataPoints endpoint. The requests contain an Authorization header with a Bearer token that corresponds to a user token received from the authorization server.",
+			"item": [
+				{
+					"name": "get data points (by schema)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints?schema_namespace=omh-capstone&schema_name=accelerometer&schema_version=1.0",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints"
+							],
+							"query": [
+								{
+									"key": "schema_namespace",
+									"value": "omh-capstone"
+								},
+								{
+									"key": "schema_name",
+									"value": "accelerometer"
+								},
+								{
+									"key": "schema_version",
+									"value": "1.0"
+								}
+							]
+						},
+						"description": "To create the data points to retrieve, issue one or more requests in the \"create data point using user token\" folder called \"success\", modifying the request bodies accordingly."
+					},
+					"response": []
+				},
+				{
+					"name": "get data points (by schema and creation date time)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints?schema_namespace=omh-capstone&schema_name=acceleration&schema_version=1.0&created_on_or_after=2018-05-01T07:24Z",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints"
+							],
+							"query": [
+								{
+									"key": "schema_namespace",
+									"value": "omh-capstone"
+								},
+								{
+									"key": "schema_name",
+									"value": "acceleration"
+								},
+								{
+									"key": "schema_version",
+									"value": "1.0"
+								},
+								{
+									"key": "created_on_or_after",
+									"value": "2018-05-01T07:24Z"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "get single data point using user token",
+			"description": "These requests GET a data point from the /dataPoints/id endpoint. The requests contain an Authorization header with a Bearer token that corresponds to a user token received from the authorization server.",
+			"item": [
+				{
+					"name": "get accelerometer data point",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints/acc",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints",
+								"acc"
+							]
+						},
+						"description": "To create the data point to retrieve, issue the request in the \"create data point using user token\" folder called \"success\"."
+					},
+					"response": []
+				},
+				{
+					"name": "get test data point",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{resourceServer.host}}:{{resourceServer.port}}/v{{apiVersion}}/dataPoints/test",
+							"protocol": "http",
+							"host": [
+								"{{resourceServer.host}}"
+							],
+							"port": "{{resourceServer.port}}",
+							"path": [
+								"v{{apiVersion}}",
+								"dataPoints",
+								"test"
+							]
+						},
+						"description": "To create the data point to retrieve, issue the request in the \"create data point using user token\" folder called \"success\"."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
