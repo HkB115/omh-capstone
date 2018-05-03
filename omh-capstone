@@ -35,7 +35,7 @@ as_user() {
 	else
 		su - $USERNAME -c "$1"
 	fi
-	}
+}
 
 server_install() {
 	printf "\nInstalling required mHealth programs ... "
@@ -70,12 +70,12 @@ server_install() {
 	printf "\nInstalling OMH Storage Endpoint API ..."
 	as_user "git clone https://github.com/openmhealth/omh-dsu-ri.git"
 
-	}
+}
 
 server_status() {
 	ps ax | grep -v grep | grep -v -i SCREEN | grep $SERVICE > /dev/null
 	return $?
-	}
+}
 
 server_start() {
 	printf "\nStarting $SERVICE ... "
@@ -111,7 +111,7 @@ server_start() {
 			printf "ERROR\n - Failed to start $SERVICE!\n"
 		fi
 	fi
-	}
+}
 
 server_stop() {
 	printf "\nStopping $SERVICE NOW ... "
@@ -131,7 +131,7 @@ server_stop() {
 	else
 		printf "Stopped\n"
 	fi
-	}
+}
 
 server_update() {
 	as_user "mkdir $OMH_PATH/update/ && cd $OMH_PATH/update/"
@@ -174,7 +174,7 @@ server_update() {
 #  else
 #    printf "ERROR\n - Could not fetch update package at requested URL\n"
 #  fi
-  }
+}
 
 server_backup() {
 	printf "\nRunning server backup ... "
@@ -195,7 +195,7 @@ server_backup() {
 	fi
 	printf "Done"
 	sleep $SLEEP_DUR
-	}
+}
 
 server_command() {
 	command="$1";
@@ -209,7 +209,7 @@ server_command() {
 		# print output
 		tail -n $[`wc -l "$RUN_PATH/commands.log" | awk '{print $1}'`-$pre_log_len] "$RUN_PATH/commands.log"
 	fi
-	}
+}
 
 case "$1" in
 	install)
