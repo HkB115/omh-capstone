@@ -41,3 +41,10 @@ Once finished, exit back to the main screen
 1. Exit the screen by pressing Ctrl+D
 
 In order to allow remote systems and users to connect to the server, you will need to create a macvlan network for docker and connect the authorization and resource servers to it.
+
+### Postman
+
+A postman collection is included to help with starting up. If an end user has not been created yet, you will have to create one using
+
+`curl -H "Content-Type:application/json" --data '{"username": "testUser", "password": "testUserPassword"}' http://host:8082/users`
+
